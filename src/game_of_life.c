@@ -7,11 +7,15 @@ int neighbors(int a[HEIGHT][WIDTH], int x, int y);
 void make_next_table(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void glider(int a[HEIGHT][WIDTH]);
+void loaf(int a[HEIGHT][WIDTH]);
+void pulsar(int a[HEIGHT][WIDTH]);
   
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    glider(cur_table);
+    //glider(cur_table);
+    //loaf(cur_table);
+    pulsar(cur_table);
     int flag = 0;
     char command;
     while (flag == 0) {
@@ -87,4 +91,65 @@ void glider(int a[HEIGHT][WIDTH]) {
     a[2][2] = 1;
     a[2][3] = 1;
     a[3][2] = 1;
+}
+
+void loaf(int a[HEIGHT][WIDTH]) {
+    a[2][1] = 1;
+    a[1][2] = 1;
+    a[3][2] = 1;
+    a[1][3] = 1;
+    a[4][3] = 1;
+    a[3][4] = 1;
+    a[2][4] = 1;
+}
+
+void pulsar(int a[HEIGHT][WIDTH]) {
+    a[4][2] = 1;
+    a[5][2] = 1;
+    a[6][2] = 1;
+    a[10][2] = 1;
+    a[11][2] = 1;
+    a[12][2] = 1;
+    a[2][4] = 1;
+    a[2][5] = 1;
+    a[2][6] = 1;
+    a[2][10] = 1;
+    a[2][11] = 1;
+    a[2][12] = 1;
+    a[4][14] = 1;
+    a[5][14] = 1;
+    a[6][14] = 1;
+    a[10][14] = 1;
+    a[11][14] = 1;
+    a[12][14] = 1;
+    a[10][7] = 1;
+    a[11][7] = 1;
+    a[12][7] = 1;
+    a[10][9] = 1;
+    a[11][9] = 1;
+    a[12][9] = 1;
+    a[4][7] = 1;
+    a[5][7] = 1;
+    a[6][7] = 1;
+    a[4][9] = 1;
+    a[5][9] = 1;
+    a[6][9] = 1;
+    a[7][4] = 1;
+    a[7][5] = 1;
+    a[7][6] = 1;
+    a[7][10] = 1;
+    a[7][11] = 1;
+    a[7][12] = 1;
+    a[9][4] = 1;
+    a[9][5] = 1;
+    a[9][6] = 1;
+    a[9][10] = 1;
+    a[9][11] = 1;
+    a[9][12] = 1;
+    a[14][4] = 1;
+    a[14][5] = 1;
+    a[14][6] = 1;
+    a[14][10] = 1;
+    a[14][11] = 1;
+    a[14][12] = 1;
 }
