@@ -10,24 +10,42 @@ void glider(int a[HEIGHT][WIDTH]);
 void bee_hive(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun (int a[HEIGHT][WIDTH]);
 void view_bin_table(int a[HEIGHT][WIDTH]);
+void loaf(int a[HEIGHT][WIDTH]);
+void pulsar(int a[HEIGHT][WIDTH]);
   
-int main(void) {
+int main(int t, char *args[]) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    gosper_glider_gun(cur_table);
+    //gosper_glider_gun(cur_table);
+    //glider(cur_table);
+    //loaf(cur_table);
+    //pulsar(cur_table);
     int flag = 0;
-    char command;
-    while (flag == 0) {
-        view(cur_table);
-        make_next_table(cur_table, next_table);
-        swap_tables(cur_table, next_table);
-        scanf("%c", &command);
-        if (command == '\n')
-            flag = 0;
-        else
-            flag = 1;
-        //view_bin_table(next_table);
-    }
+    char c, e;
+    int cnt = 0;
+    //while (flag == 0) {
+        //view(cur_table);
+        //make_next_table(cur_table, next_table);
+        //swap_tables(cur_table, next_table);
+            c = getchar();
+            while (c != EOF) {
+                if (c == '1') cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
+                if (c == '0') cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
+                c = getchar();
+                cnt += 1;
+            }
+            rewind(stdin);
+            freopen("/dev/tty","r",stdin);
+            printf("Введите скорость 1-5\n");
+            scanf("%c", &c);
+            printf("Скорость %c\n", c);
+             
+        //if (command == '\n')
+        //    flag = 0;
+        //else
+        //    flag = 1;
+        view_bin_table(cur_table);
+    //}
     return 0;
 }
 
@@ -113,45 +131,6 @@ void bee_hive(int a[HEIGHT][WIDTH]) {
     a[3][3] = 1;
 }
 
-// void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
-//     a[1][5] = 1;
-//     a[1][6] = 1;
-//     a[2][5] = 1;
-//     a[2][6] = 1;
-//     a[11][5] = 1;
-//     a[11][6] = 1;
-//     a[11][7] = 1;
-//     a[12][4] = 1;
-//     a[12][8] = 1;
-//     a[13][3] = 1;
-//     a[13][9] = 1;
-//     a[14][3] = 1;
-//     a[14][9] = 1;
-//     a[15][6] = 1;
-//     a[16][4] = 1;
-//     a[16][8] = 1;
-//     a[17][5] = 1;
-//     a[17][6] = 1;
-//     a[17][7] = 1;
-//     a[18][6] = 1;
-//     a[21][3] = 1;
-//     a[21][4] = 1;
-//     a[21][5] = 1;
-//     a[22][3] = 1;
-//     a[22][4] = 1;
-//     a[22][5] = 1;
-//     a[23][2] = 1;
-//     a[23][6] = 1;
-//     a[25][1] = 1;
-//     a[25][2] = 1;
-//     a[25][6] = 1;
-//     a[25][7] = 1;
-//     a[35][3] = 1;
-//     a[35][4] = 1;
-//     a[36][3] = 1;
-//     a[36][4] = 1;
-// }
-
 void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[5][1] = 1;
     a[6][1] = 1;
@@ -189,4 +168,64 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[4][35] = 1;
     a[3][36] = 1;
     a[4][36] = 1;
+}
+void loaf(int a[HEIGHT][WIDTH]) {
+    a[2][1] = 1;
+    a[1][2] = 1;
+    a[3][2] = 1;
+    a[1][3] = 1;
+    a[4][3] = 1;
+    a[3][4] = 1;
+    a[2][4] = 1;
+}
+
+void pulsar(int a[HEIGHT][WIDTH]) {
+    a[4][2] = 1;
+    a[5][2] = 1;
+    a[6][2] = 1;
+    a[10][2] = 1;
+    a[11][2] = 1;
+    a[12][2] = 1;
+    a[2][4] = 1;
+    a[2][5] = 1;
+    a[2][6] = 1;
+    a[2][10] = 1;
+    a[2][11] = 1;
+    a[2][12] = 1;
+    a[4][14] = 1;
+    a[5][14] = 1;
+    a[6][14] = 1;
+    a[10][14] = 1;
+    a[11][14] = 1;
+    a[12][14] = 1;
+    a[10][7] = 1;
+    a[11][7] = 1;
+    a[12][7] = 1;
+    a[10][9] = 1;
+    a[11][9] = 1;
+    a[12][9] = 1;
+    a[4][7] = 1;
+    a[5][7] = 1;
+    a[6][7] = 1;
+    a[4][9] = 1;
+    a[5][9] = 1;
+    a[6][9] = 1;
+    a[7][4] = 1;
+    a[7][5] = 1;
+    a[7][6] = 1;
+    a[7][10] = 1;
+    a[7][11] = 1;
+    a[7][12] = 1;
+    a[9][4] = 1;
+    a[9][5] = 1;
+    a[9][6] = 1;
+    a[9][10] = 1;
+    a[9][11] = 1;
+    a[9][12] = 1;
+    a[14][4] = 1;
+    a[14][5] = 1;
+    a[14][6] = 1;
+    a[14][10] = 1;
+    a[14][11] = 1;
+    a[14][12] = 1;
 }
