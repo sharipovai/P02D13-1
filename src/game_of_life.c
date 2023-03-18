@@ -6,13 +6,12 @@ void view(int a[HEIGHT][WIDTH]);
 int neighbors(int a[HEIGHT][WIDTH], int x, int y);
 void make_next_table(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
- 
+void glider(int a[HEIGHT][WIDTH]);
+  
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    cur_table[2][3] = 1;
-    cur_table[3][3] = 1;
-    cur_table[4][3] = 1;
+    glider(cur_table);
     int flag = 0;
     char command;
     while (flag == 0) {
@@ -81,4 +80,11 @@ void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]) {
         }
     }
 }
- 
+
+void glider(int a[HEIGHT][WIDTH]) {
+    a[1][1] = 1;
+    a[1][3] = 1;
+    a[2][2] = 1;
+    a[2][3] = 1;
+    a[3][2] = 1;
+}
