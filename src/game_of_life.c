@@ -8,13 +8,13 @@ void make_next_table(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void glider(int a[HEIGHT][WIDTH]);
 void bee_hive(int a[HEIGHT][WIDTH]);
-void gosper_glider_gun (int a[HEIGHT][WIDTH]);
-void hvss(int a[HEIGHT][WIDTH]);
+void gosper_glider_gun(int a[HEIGHT][WIDTH]);
+void hwss(int a[HEIGHT][WIDTH]);
   
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    hvss(cur_table);
+    gosper_glider_gun(cur_table);
     int flag = 0;
     char command;
     while (flag == 0) {
@@ -140,7 +140,7 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[4][36] = 1;
 }
 
-void hvss(int a[HEIGHT][WIDTH]) {
+void hwss(int a[HEIGHT][WIDTH]) {
     a[1][4] = 1;
     a[1][5] = 1;
     a[2][2] = 1;
