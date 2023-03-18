@@ -9,11 +9,12 @@ void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void glider(int a[HEIGHT][WIDTH]);
 void bee_hive(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun (int a[HEIGHT][WIDTH]);
+void hvss(int a[HEIGHT][WIDTH]);
   
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    gosper_glider_gun(cur_table);
+    hvss(cur_table);
     int flag = 0;
     char command;
     while (flag == 0) {
@@ -100,45 +101,6 @@ void bee_hive(int a[HEIGHT][WIDTH]) {
     a[3][3] = 1;
 }
 
-// void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
-//     a[1][5] = 1;
-//     a[1][6] = 1;
-//     a[2][5] = 1;
-//     a[2][6] = 1;
-//     a[11][5] = 1;
-//     a[11][6] = 1;
-//     a[11][7] = 1;
-//     a[12][4] = 1;
-//     a[12][8] = 1;
-//     a[13][3] = 1;
-//     a[13][9] = 1;
-//     a[14][3] = 1;
-//     a[14][9] = 1;
-//     a[15][6] = 1;
-//     a[16][4] = 1;
-//     a[16][8] = 1;
-//     a[17][5] = 1;
-//     a[17][6] = 1;
-//     a[17][7] = 1;
-//     a[18][6] = 1;
-//     a[21][3] = 1;
-//     a[21][4] = 1;
-//     a[21][5] = 1;
-//     a[22][3] = 1;
-//     a[22][4] = 1;
-//     a[22][5] = 1;
-//     a[23][2] = 1;
-//     a[23][6] = 1;
-//     a[25][1] = 1;
-//     a[25][2] = 1;
-//     a[25][6] = 1;
-//     a[25][7] = 1;
-//     a[35][3] = 1;
-//     a[35][4] = 1;
-//     a[36][3] = 1;
-//     a[36][4] = 1;
-// }
-
 void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[5][1] = 1;
     a[6][1] = 1;
@@ -176,4 +138,20 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[4][35] = 1;
     a[3][36] = 1;
     a[4][36] = 1;
+}
+
+void hvss(int a[HEIGHT][WIDTH]) {
+    a[1][4] = 1;
+    a[1][5] = 1;
+    a[2][2] = 1;
+    a[2][7] = 1;
+    a[3][1] = 1;
+    a[4][1] = 1;
+    a[4][7] = 1;
+    a[5][1] = 1;
+    a[5][2] = 1;
+    a[5][3] = 1;
+    a[5][4] = 1;
+    a[5][5] = 1;
+    a[5][6] = 1;
 }
