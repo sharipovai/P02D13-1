@@ -28,9 +28,11 @@ int main(void) {
 }
 
 void view (int a[HEIGHT][WIDTH]) {
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (a[i][j] == 0) printf(" ");
+    for (int i = -1; i < HEIGHT + 1; i++) {
+        for (int j = -1; j < WIDTH + 1; j++) {
+            if (i == -1 || i == HEIGHT) printf("-");
+            else if (j == -1 || j == WIDTH) printf("|");
+	    else if (a[i][j] == 0) printf(" ");
             else printf("#");
         }
         printf("\n");
