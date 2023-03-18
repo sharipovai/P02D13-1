@@ -17,9 +17,10 @@ int main(int t, char *args[]) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
     //gosper_glider_gun(cur_table);
-    //glider(cur_table);
+    ///glider(cur_table);
     //loaf(cur_table);
     //pulsar(cur_table);
+    bee_hive(cur_table);
     int flag = 0;
     char c, e;
     int cnt = 0;
@@ -39,7 +40,7 @@ int main(int t, char *args[]) {
             printf("Введите скорость 1-5\n");
             scanf("%c", &c);
             printf("Скорость %c\n", c);
-             
+
         //if (command == '\n')
         //    flag = 0;
         //else
@@ -169,6 +170,7 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[3][36] = 1;
     a[4][36] = 1;
 }
+
 void loaf(int a[HEIGHT][WIDTH]) {
     a[2][1] = 1;
     a[1][2] = 1;
