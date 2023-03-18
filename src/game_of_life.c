@@ -9,6 +9,7 @@ void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void glider(int a[HEIGHT][WIDTH]);
 void bee_hive(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun (int a[HEIGHT][WIDTH]);
+void view_bin_table(int a[HEIGHT][WIDTH]);
   
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
@@ -24,11 +25,21 @@ int main(void) {
         if (command == '\n')
             flag = 0;
         else
-            flag = 1;  
+            flag = 1;
+        //view_bin_table(next_table);
     }
     return 0;
 }
 
+void view_bin_table (int a[HEIGHT][WIDTH]) {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            printf("%d", a[i][j]);
+        }
+        printf("\n");
+    }
+}
+ 
 void view (int a[HEIGHT][WIDTH]) {
     for (int i = -1; i < HEIGHT + 1; i++) {
         for (int j = -1; j < WIDTH + 1; j++) {
