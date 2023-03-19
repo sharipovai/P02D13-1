@@ -14,6 +14,7 @@ void loaf(int a[HEIGHT][WIDTH]);
 void pulsar(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun(int a[HEIGHT][WIDTH]);
 void hwss(int a[HEIGHT][WIDTH]);
+void start_pic_choice(int a[HEIGHT][WIDTH]);
   
 int main(int t, char *args[]) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
@@ -21,22 +22,7 @@ int main(int t, char *args[]) {
     int flag = 0, cnt = 0;
     char command, c;
     int velocity = 0;
-    FILE *fptr;
-    if ((fptr = fopen("gosper_glider_gun.txt", "r")) == NULL) {
-        printf("Error! Opening file");
-    } else {
-        while ((c = getc(fptr)) != EOF) {
-            if (c == '1') {
-                cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
-                cnt += 1;
-            }
-            if (c == '0') {
-                cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
-                cnt += 1;
-            }
-       }
-       fclose (fptr);
-    }
+    void start_pic_choice(cur_table);
     printf("Введите скорость 1-5\n");
     rewind(stdin);
     scanf("%d", &velocity);
@@ -53,7 +39,50 @@ int main(int t, char *args[]) {
     }
     return 0;
 }
+void start_pic_choice(int a[HEIGHT][WIDTH]) {
+    int flag = 0, game_id = 0, t = 0;
+    while (flag == 0) {
+        printf("Выберите начальную инициализацию:\n");
+        printf("1 - улей\n");
+        printf("2 - лист\n");
+        printf("3 - пульсар\n");
+        printf("4 - глайдер\n");
+        printf("5 - планерное ружье Госпер\n");
+        if (scanf("%d.%d", &game_id, &t) == 1 && game_id > 0 && game_if < 6) {
+            flag = 1;
+        } else {
+            printf("Ошибка! Повторите попытку!\n");
+        }
+    }
+    char **file_names = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt", "gosper_glider_gun"};
+    FILE *fptr;
+    switch (game_id) {
+        case 1:
+    if ((fptr = fopen("gosper_glider_gun.txt", "r")) == NULL) {
+        printf("Error! Opening file");
+    } else {
+        while ((c = getc(fptr)) != EOF) {
+            if (c == '1') {
+                cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
+                cnt += 1;
+            }
+            if (c == '0') {
+                cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
+                cnt += 1;
+            }
+       }
+       fclose (fptr);
+    }
+        
+        
 
+
+    }
+
+
+
+}
+ 
 void view_bin_table (int a[HEIGHT][WIDTH]) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
