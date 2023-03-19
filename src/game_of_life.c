@@ -174,6 +174,10 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[3][36] = 1;
     a[4][36] = 1;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4bffe1f1747f746630243273a3b446d76746433
 void loaf(int a[HEIGHT][WIDTH]) {
     a[2][1] = 1;
     a[1][2] = 1;
