@@ -15,14 +15,15 @@ void pulsar(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun(int a[HEIGHT][WIDTH]);
 void hwss(int a[HEIGHT][WIDTH]);
 void start_pic_choice(int a[HEIGHT][WIDTH]);
-  
-int main(int t, char *args[]) {
+void read_file(char *name, int a[HEIGHT][WIDTH]);
+     
+int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
     int flag = 0, cnt = 0;
     char command, c;
     int velocity = 0;
-    void start_pic_choice(cur_table);
+    start_pic_choice(cur_table);
     printf("Введите скорость 1-5\n");
     rewind(stdin);
     scanf("%d", &velocity);
@@ -36,6 +37,7 @@ int main(int t, char *args[]) {
         else
             flag = 1;
         //view_bin_table(cur_table);
+        printf("\033[0d\033[2J");
     }
     return 0;
 }
@@ -48,39 +50,51 @@ void start_pic_choice(int a[HEIGHT][WIDTH]) {
         printf("3 - пульсар\n");
         printf("4 - глайдер\n");
         printf("5 - планерное ружье Госпер\n");
-        if (scanf("%d.%d", &game_id, &t) == 1 && game_id > 0 && game_if < 6) {
+        if (scanf("%d.%d", &game_id, &t) == 1 && game_id > 0 && game_id < 6) {
             flag = 1;
         } else {
             printf("Ошибка! Повторите попытку!\n");
         }
     }
-    char **file_names = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt", "gosper_glider_gun"};
-    FILE *fptr;
+    char file_names[5][22] = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt", "gosper_glider_gun.txt"};    
     switch (game_id) {
         case 1:
-    if ((fptr = fopen("gosper_glider_gun.txt", "r")) == NULL) {
+            read_file(file_names[0], a);
+            break;
+        case 2:
+            read_file(file_names[1], a);
+            break;
+        case 3:
+            read_file(file_names[2], a);
+            break;
+        case 4:
+            read_file(file_names[3], a);
+            break;
+        case 5:
+            read_file(file_names[4], a);
+            break;
+    }
+}
+
+void read_file(char *name, int a[HEIGHT][WIDTH]) {
+    FILE *fptr;
+    int cnt = 0;
+    char c;
+    if ((fptr = fopen(name, "r")) == NULL) {
         printf("Error! Opening file");
     } else {
         while ((c = getc(fptr)) != EOF) {
             if (c == '1') {
-                cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
+                a[cnt / WIDTH][cnt % WIDTH] = 1;
                 cnt += 1;
             }
             if (c == '0') {
-                cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
+                a[cnt / WIDTH][cnt % WIDTH] = 0;
                 cnt += 1;
             }
        }
        fclose (fptr);
-    }
-        
-        
-
-
-    }
-
-
-
+    }            
 }
  
 void view_bin_table (int a[HEIGHT][WIDTH]) {
@@ -203,10 +217,7 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]) {
     a[3][36] = 1;
     a[4][36] = 1;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> f4bffe1f1747f746630243273a3b446d76746433
 void loaf(int a[HEIGHT][WIDTH]) {
     a[2][1] = 1;
     a[1][2] = 1;
