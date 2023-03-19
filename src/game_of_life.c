@@ -12,6 +12,8 @@ void gosper_glider_gun (int a[HEIGHT][WIDTH]);
 void view_bin_table(int a[HEIGHT][WIDTH]);
 void loaf(int a[HEIGHT][WIDTH]);
 void pulsar(int a[HEIGHT][WIDTH]);
+void gosper_glider_gun(int a[HEIGHT][WIDTH]);
+void hwss(int a[HEIGHT][WIDTH]);
   
 int main(int t, char *args[]) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
@@ -231,4 +233,20 @@ void pulsar(int a[HEIGHT][WIDTH]) {
     a[14][10] = 1;
     a[14][11] = 1;
     a[14][12] = 1;
+}
+
+void hwss(int a[HEIGHT][WIDTH]) {
+    a[1][4] = 1;
+    a[1][5] = 1;
+    a[2][2] = 1;
+    a[2][7] = 1;
+    a[3][1] = 1;
+    a[4][1] = 1;
+    a[4][7] = 1;
+    a[5][1] = 1;
+    a[5][2] = 1;
+    a[5][3] = 1;
+    a[5][4] = 1;
+    a[5][5] = 1;
+    a[5][6] = 1;
 }
