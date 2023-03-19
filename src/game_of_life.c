@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 #define WIDTH 80
 #define HEIGHT 25
 
@@ -16,6 +17,7 @@ void gosper_glider_gun(int a[HEIGHT][WIDTH]);
 void hwss(int a[HEIGHT][WIDTH]);
 void start_pic_choice(int a[HEIGHT][WIDTH]);
 void read_file(char *name, int a[HEIGHT][WIDTH]);
+int cnt_alive(int a[HEIGHT][WIDTH]);
      
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
@@ -27,20 +29,29 @@ int main(void) {
     printf("Введите скорость 1-5\n");
     rewind(stdin);
     scanf("%d", &velocity);
-    while (flag == 0) {
+    while (cnt <= 1000 && cnt_alive(cur_table) != 0) {
         view(cur_table);
+        printf("Generation %d\n", cnt);
         make_next_table(cur_table, next_table);
-        swap_tables(cur_table, next_table);   
-        scanf("%c", &command);
-        if (command == '\n')
-            flag = 0;
-        else
-            flag = 1;
-        //view_bin_table(cur_table);
+        swap_tables(cur_table, next_table);
+        cnt += 1;
+        usleep(20000 - 3000 * velocity);
         printf("\033[0d\033[2J");
     }
     return 0;
 }
+
+int cnt_alive(int a[HEIGHT][WIDTH]) {
+    int cnt = 0;
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            cnt += a[i][j];
+        }
+        printf("\n");
+    }
+    return cnt;
+} 
+
 void start_pic_choice(int a[HEIGHT][WIDTH]) {
     int flag = 0, game_id = 0, t = 0;
     while (flag == 0) {
