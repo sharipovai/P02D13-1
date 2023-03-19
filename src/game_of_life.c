@@ -55,15 +55,16 @@ void start_pic_choice(int a[HEIGHT][WIDTH]) {
         printf("3 - пульсар\n");
         printf("4 - глайдер\n");
         printf("5 - планерное ружье Госпер\n");
-        if (scanf("%d.%d", &game_id, &t) == 1 && game_id > 0 && game_id < 6) {
+        printf("6 - глидер + пульсар\n");
+        if (scanf("%d.%d", &game_id, &t) == 1 && game_id > 0 && game_id < 7) {
             flag = 1;
         } else {
             printf("Ошибка! Повторите попытку!\n");
         }
         rewind(stdin);
     }
-    char file_names[5][22] = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt",
-                              "gosper_glider_gun.txt"};
+    char file_names[6][22] = {"bee_hive.txt",          "loaf.txt",         "pulsar.txt", "glider.txt",
+                              "gosper_glider_gun.txt", "glider_pulsar.txt"};
     switch (game_id) {
         case 1:
             read_file(file_names[0], a);
@@ -79,6 +80,9 @@ void start_pic_choice(int a[HEIGHT][WIDTH]) {
             break;
         case 5:
             read_file(file_names[4], a);
+            break;
+        case 6:
+            read_file(file_names[5], a);
             break;
     }
 }
