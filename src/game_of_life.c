@@ -16,36 +16,39 @@ void pulsar(int a[HEIGHT][WIDTH]);
 int main(int t, char *args[]) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
     int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    //gosper_glider_gun(cur_table);
-    //glider(cur_table);
-    //loaf(cur_table);
-    //pulsar(cur_table);
-    int flag = 0;
-    char c, e;
-    int cnt = 0;
-    //while (flag == 0) {
-        //view(cur_table);
-        //make_next_table(cur_table, next_table);
-        //swap_tables(cur_table, next_table);
-            c = getchar();
-            while (c != EOF) {
-                if (c == '1') cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
-                if (c == '0') cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
-                c = getchar();
+    int flag = 0, cnt = 0;
+    char command, c;
+    int velocity = 0;
+    FILE *fptr;
+    if ((fptr = fopen("gosper_glider_gun.txt", "r")) == NULL) {
+        printf("Error! Opening file");
+    } else {
+        while ((c = getc(fptr)) != EOF) {
+            if (c == '1') {
+                cur_table[cnt / WIDTH][cnt % WIDTH] = 1;
                 cnt += 1;
             }
-            rewind(stdin);
-            freopen("/dev/tty","r",stdin);
-            printf("Введите скорость 1-5\n");
-            scanf("%c", &c);
-            printf("Скорость %c\n", c);
-             
-        //if (command == '\n')
-        //    flag = 0;
-        //else
-        //    flag = 1;
-        view_bin_table(cur_table);
-    //}
+            if (c == '0') {
+                cur_table[cnt / WIDTH][cnt % WIDTH] = 0;
+                cnt += 1;
+            }
+       }
+       fclose (fptr);
+    }
+    printf("Введите скорость 1-5\n");
+    rewind(stdin);
+    scanf("%d", &velocity);
+    while (flag == 0) {
+        view(cur_table);
+        make_next_table(cur_table, next_table);
+        swap_tables(cur_table, next_table);   
+        scanf("%c", &command);
+        if (command == '\n')
+            flag = 0;
+        else
+            flag = 1;
+        //view_bin_table(cur_table);
+    }
     return 0;
 }
 
