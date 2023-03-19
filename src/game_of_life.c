@@ -10,10 +10,12 @@ void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void start_pic_choice(int a[HEIGHT][WIDTH]);
 void read_file(char *name, int a[HEIGHT][WIDTH]);
 int cnt_alive(int a[HEIGHT][WIDTH]);
+int tables_is_same(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {{cur_table[0][0] = 0}};
     int next_table[HEIGHT][WIDTH] = {{next_table[0][0] = 0}};
+    int check_table[HEIGHT][WIDTH] = {{check_table[0][0] = 1}};
     int cnt = 0, t = 0;
     int velocity = 0;
     start_pic_choice(cur_table);
@@ -22,15 +24,17 @@ int main(void) {
         printf("Введите скорость 1-5\n");
         rewind(stdin);
     }
-    while (cnt <= 1000 && cnt_alive(cur_table) != 0) {
+    while ((cnt <= 1150) && (cnt_alive(cur_table) != 0) && (tables_is_same(check_table, next_table) != 1)) {
         view(cur_table);
+        if (cnt % 3 == 0) swap_tables(check_table, cur_table);
         printf("Generation %d\n", cnt);
         make_next_table(cur_table, next_table);
         swap_tables(cur_table, next_table);
         cnt += 1;
         usleep(20000 - 3000 * velocity);
-        printf("\033[0d\033[2J");
+        // printf("\033[0d\033[2J");
     }
+    view(cur_table);
     printf("Game over!\n");
     return 0;
 }
@@ -41,9 +45,21 @@ int cnt_alive(int a[HEIGHT][WIDTH]) {
         for (int j = 0; j < WIDTH; j++) {
             cnt += a[i][j];
         }
-        printf("\n");
     }
     return cnt;
+}
+
+int tables_is_same(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]) {
+    int res = 1;
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if (a[i][j] != b[i][j]) {
+                res = 0;
+                break;
+            }
+        }
+    }
+    return res;
 }
 
 void start_pic_choice(int a[HEIGHT][WIDTH]) {
