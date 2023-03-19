@@ -10,17 +10,18 @@ void swap_tables(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]);
 void start_pic_choice(int a[HEIGHT][WIDTH]);
 void read_file(char *name, int a[HEIGHT][WIDTH]);
 int cnt_alive(int a[HEIGHT][WIDTH]);
-     
+
 int main(void) {
-    int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
-    int next_table[HEIGHT][WIDTH] = {next_table[0][0] = 0};
-    int flag = 0, cnt = 0;
-    char command, c;
+    int cur_table[HEIGHT][WIDTH] = {{cur_table[0][0] = 0}};
+    int next_table[HEIGHT][WIDTH] = {{next_table[0][0] = 0}};
+    int cnt = 0, t = 0;
     int velocity = 0;
     start_pic_choice(cur_table);
     printf("Введите скорость 1-5\n");
-    rewind(stdin);
-    scanf("%d", &velocity);
+    while (scanf("%d.%d", &velocity, &t) != 1 || velocity < 1 || velocity > 5) {
+        printf("Введите скорость 1-5\n");
+        rewind(stdin);
+    }
     while (cnt <= 1000 && cnt_alive(cur_table) != 0) {
         view(cur_table);
         printf("Generation %d\n", cnt);
@@ -30,6 +31,7 @@ int main(void) {
         usleep(20000 - 3000 * velocity);
         printf("\033[0d\033[2J");
     }
+    printf("Game over!\n");
     return 0;
 }
 
@@ -42,7 +44,7 @@ int cnt_alive(int a[HEIGHT][WIDTH]) {
         printf("\n");
     }
     return cnt;
-} 
+}
 
 void start_pic_choice(int a[HEIGHT][WIDTH]) {
     int flag = 0, game_id = 0, t = 0;
@@ -58,8 +60,10 @@ void start_pic_choice(int a[HEIGHT][WIDTH]) {
         } else {
             printf("Ошибка! Повторите попытку!\n");
         }
+        rewind(stdin);
     }
-    char file_names[5][22] = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt", "gosper_glider_gun.txt"};    
+    char file_names[5][22] = {"bee_hive.txt", "loaf.txt", "pulsar.txt", "glider.txt",
+                              "gosper_glider_gun.txt"};
     switch (game_id) {
         case 1:
             read_file(file_names[0], a);
@@ -81,11 +85,11 @@ void start_pic_choice(int a[HEIGHT][WIDTH]) {
 
 void read_file(char *name, int a[HEIGHT][WIDTH]) {
     FILE *fptr;
-    int cnt = 0;
-    char c;
     if ((fptr = fopen(name, "r")) == NULL) {
         printf("Error! Opening file");
     } else {
+        int cnt = 0;
+        char c;
         while ((c = getc(fptr)) != EOF) {
             if (c == '1') {
                 a[cnt / WIDTH][cnt % WIDTH] = 1;
@@ -95,18 +99,22 @@ void read_file(char *name, int a[HEIGHT][WIDTH]) {
                 a[cnt / WIDTH][cnt % WIDTH] = 0;
                 cnt += 1;
             }
-       }
-       fclose (fptr);
-    }            
+        }
+        fclose(fptr);
+    }
 }
- 
-void view (int a[HEIGHT][WIDTH]) {
+
+void view(int a[HEIGHT][WIDTH]) {
     for (int i = -1; i < HEIGHT + 1; i++) {
         for (int j = -1; j < WIDTH + 1; j++) {
-            if (i == -1 || i == HEIGHT) printf("-");
-            else if (j == -1 || j == WIDTH) printf("|");
-	    else if (a[i][j] == 0) printf(" ");
-            else printf("#");
+            if (i == -1 || i == HEIGHT)
+                printf("-");
+            else if (j == -1 || j == WIDTH)
+                printf("|");
+            else if (a[i][j] == 0)
+                printf(" ");
+            else
+                printf("#");
         }
         printf("\n");
     }
@@ -114,15 +122,21 @@ void view (int a[HEIGHT][WIDTH]) {
 
 int neighbors(int a[HEIGHT][WIDTH], int x, int y) {
     int cnt = 0;
-    int line = 0, col = 0;
     for (int i = y - 1; i <= y + 1; i++) {
         for (int j = x - 1; j <= x + 1; j++) {
-            if (i < 0) line = HEIGHT - 1;
-            else if (i >= HEIGHT) line = 0;
-            else line = i;
-            if (j < 0) col = WIDTH - 1;
-            else if (j >= WIDTH) col = 0;
-            else col = j;
+            int line = 0, col = 0;
+            if (i < 0)
+                line = HEIGHT - 1;
+            else if (i >= HEIGHT)
+                line = 0;
+            else
+                line = i;
+            if (j < 0)
+                col = WIDTH - 1;
+            else if (j >= WIDTH)
+                col = 0;
+            else
+                col = j;
             cnt += a[line][col];
         }
     }
@@ -131,16 +145,15 @@ int neighbors(int a[HEIGHT][WIDTH], int x, int y) {
 }
 
 void make_next_table(int a[HEIGHT][WIDTH], int b[HEIGHT][WIDTH]) {
-    int nb = 0;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
-            nb = neighbors(a, j, i); 
+            int nb = neighbors(a, j, i);
             if (a[i][j] == 0 && nb == 3) {
                 b[i][j] = 1;
             }
-            if (a[i][j] == 1 && (nb >= 2 || nb <= 3)) {
+            if (a[i][j] == 1 && (nb == 2 || nb == 3)) {
                 b[i][j] = 1;
-            }     
+            }
             if (a[i][j] == 1 && (nb < 2 || nb > 3)) {
                 b[i][j] = 0;
             }
