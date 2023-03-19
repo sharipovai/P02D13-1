@@ -10,6 +10,7 @@ void glider(int a[HEIGHT][WIDTH]);
 void bee_hive(int a[HEIGHT][WIDTH]);
 void gosper_glider_gun(int a[HEIGHT][WIDTH]);
 void hwss(int a[HEIGHT][WIDTH]);
+
   
 int main(void) {
     int cur_table[HEIGHT][WIDTH] = {cur_table[0][0] = 0};
@@ -155,3 +156,4 @@ void hwss(int a[HEIGHT][WIDTH]) {
     a[5][5] = 1;
     a[5][6] = 1;
 }
+
